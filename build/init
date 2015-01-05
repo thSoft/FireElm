@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+cd ${0%/*}
+npm install -g typescript
+npm install -g bower
+npm install -g tsd
+npm install
+bower install
+tsd reinstall --save

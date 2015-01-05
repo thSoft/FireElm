@@ -1,0 +1,21 @@
+{
+  "name": "FireElm",
+  "version": "0.0.1",
+  "description": "Firebase-Elm integration",
+  "authors": [
+    "Dénes Harmath <harmathdenes@gmail.com>"
+  ],
+  "license": "MIT",
+  "main": "../src/typescript/FireElm.ts",
+  "moduleType": [
+    "globals"
+  ],
+  "ignore": [
+    "../**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "firebase": "~2.0.6"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "FireElm",
+  "version": "0.0.1",
+  "description": "Firebase-Elm integration",
+  "devDependencies": {
+    "node-watch": "^0.3.4",
+    "shelljs": "^0.3.0"
+  }
+}

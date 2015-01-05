@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+require('shelljs/global');
+var path = require('path');
+var paths = require('./paths.js');
+
+rm('-rf', paths.target);
+make(path.join(paths.sourceTypeScript, 'FireElm.ts'), path.join(paths.target, 'FireElm.js'));
+
+function make(source, target) {
+  cd(paths.build);
+  exec('tsc ' + source + ' --out ' + target);
+  echo('Compiled ' + source);
+}

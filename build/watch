@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+require('shelljs/global');
+var path = require('path');
+var watch = require('node-watch');
+var paths = require('./paths.js');
+
+build();
+watch([paths.sourceTypeScript], function (event, filename) {
+  build();
+});
+
+function build() {
+  clearScreen();
+  exec(path.join(paths.build, 'build'));
+}
+
+function clearScreen() {
+  console.log('\033[2J');
+}
