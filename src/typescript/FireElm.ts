@@ -13,7 +13,7 @@ module FireElm {
         new Firebase(observedUrl).on(callbackType, data => {
           dataPort.send({
             url: observedUrl,
-            data: data
+            data: data.val()
           });
         });
       });
