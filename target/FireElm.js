@@ -1,7 +1,6 @@
-///<reference path="../typings/tsd.d.ts"/>
 var FireElm;
 (function (FireElm) {
-    function read(observedUrlsPort, dataPort) {
+    function read(observedUrlsPort, readPort) {
         var currentlyObservedUrls = [];
         var callbackType = "value";
         observedUrlsPort.subscribe(function (observedUrls) {
@@ -11,7 +10,7 @@ var FireElm;
             currentlyObservedUrls = observedUrls;
             observedUrls.forEach(function (observedUrl) {
                 new Firebase(observedUrl).on(callbackType, function (snapshot) {
-                    dataPort.send({
+                    readPort.send({
                         url: snapshot.key(),
                         value: snapshot.val()
                     });

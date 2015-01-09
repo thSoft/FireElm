@@ -1,4 +1,3 @@
-///<reference path="../typings/tsd.d.ts"/>
 module FireElm {
 
   export function read(observedUrlsPort: PortFromElm<Array<string>>, readPort: PortToElm<Snapshot>) {
