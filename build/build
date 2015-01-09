@@ -9,6 +9,6 @@ make(path.join(paths.source, 'FireElm.ts'), path.join(paths.target, 'FireElm.js'
 
 function make(source, target) {
   cd(paths.build);
-  exec('tsc ' + source + ' --out ' + target);
+  exec('tsc ' + source + ' --out ' + target + ' -d');
   echo('Compiled ' + source);
 }
