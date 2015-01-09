@@ -1,28 +1,27 @@
 {
   "name": "FireElm",
-  "version": "0.0.1",
   "description": "Firebase-Elm integration",
-  "authors": [
-    "Dénes Harmath <harmathdenes@gmail.com>"
-  ],
-  "license": "MIT",
   "main": "target/FireElm.js",
-  "typescript": {
-    "definition": "target/FireElm.d.ts"
-  },
-  "moduleType": [
-    "globals"
-  ],
+  "license": "MIT",
   "ignore": [
-    "node_modules",
-    "bower_components",
-    "typings",
-    "build",
-    "src",
-    "*.json",
-    ".*"
+    "/*",
+    "!/target"
   ],
+  "authors": [
+    {
+      "name": "Dénes Harmath",
+      "email": "<harmathdenes@gmail.com>",
+      "homepage": "http://thsoft.hu"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/thSoft/FireElm.git"
+  },
   "dependencies": {
     "firebase": "~2.1.0"
+  },
+  "typescript": {
+    "definition": "target/FireElm.d.ts"
   }
 }
