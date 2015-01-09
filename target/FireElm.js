@@ -1,6 +1,6 @@
 var FireElm;
 (function (FireElm) {
-    function read(observedUrlsPort, readPort) {
+    function read(observedUrlsPort, readPort, transform) {
         var currentlyObservedUrls = [];
         var callbackType = "value";
         observedUrlsPort.subscribe(function (observedUrls) {
@@ -12,7 +12,7 @@ var FireElm;
                 new Firebase(observedUrl).on(callbackType, function (snapshot) {
                     readPort.send({
                         url: snapshot.toString(),
-                        value: snapshot.val()
+                        value: transform(snapshot.val())
                     });
                 });
             });
