@@ -11,7 +11,7 @@ module FireElm {
       observedUrls.forEach(observedUrl => {
         new Firebase(observedUrl).on(callbackType, snapshot => {
           readPort.send({
-            url: snapshot.key(),
+            url: snapshot.toString(),
             value: snapshot.val()
           });
         });
