@@ -1,10 +1,10 @@
 declare module FireElm {
-    interface Snapshot {
+    interface Data {
         url: string;
         value: any;
     }
-    function read(observedUrlsPort: PortFromElm<string[]>, readPort: PortToElm<Snapshot>): void;
-    function write(writePort: PortFromElm<Snapshot>): void;
-    function push(pushPort: PortFromElm<Snapshot>): void;
+    function read(observedUrlsPort: PortFromElm<string[]>, readPort: PortToElm<Data>): void;
+    function write(writePort: PortFromElm<Data>): void;
+    function push(pushPort: PortFromElm<Data>): void;
     function remove(urlPort: PortFromElm<string>): void;
 }
