@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "node-watch": "^0.3.4",
+    "shelljs": "^0.3.0"
+  }
+}

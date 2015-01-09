@@ -1,7 +1,7 @@
-///<reference path="../../build/typings/tsd.d.ts"/>
+///<reference path="../typings/tsd.d.ts"/>
 module FireElm {
 
-  function read(observedUrlsPort: PortFromElm<Array<string>>, dataPort: PortToElm<Value>) {
+  function read(observedUrlsPort: PortFromElm<Array<string>>, dataPort: PortToElm<Snapshot>) {
     var currentlyObservedUrls: Array<string> = [];
     var callbackType = "value";
     observedUrlsPort.subscribe(observedUrls => {
@@ -10,19 +10,19 @@ module FireElm {
       });
       currentlyObservedUrls = observedUrls; 
       observedUrls.forEach(observedUrl => {
-        new Firebase(observedUrl).on(callbackType, data => {
+        new Firebase(observedUrl).on(callbackType, snapshot => {
           dataPort.send({
-            url: observedUrl,
-            data: data.val()
+            url: snapshot.key(),
+            value: snapshot.val()
           });
         });
       });
     });
   }
 
-  interface Value {
-    url: string;
-    data: Object;
+  interface Snapshot {
+    url: String;
+    value: any;
   }
 
 }

@@ -6,16 +6,20 @@
     "Dénes Harmath <harmathdenes@gmail.com>"
   ],
   "license": "MIT",
-  "main": "../src/typescript/FireElm.ts",
+  "main": "src/*.ts",
   "moduleType": [
     "globals"
   ],
   "ignore": [
-    "../**/.*",
     "node_modules",
-    "bower_components"
+    "bower_components",
+    "typings",
+    "build",
+    "target",
+    "*.json",
+    ".*"
   ],
   "dependencies": {
-    "firebase": "~2.0.6"
+    "firebase": "~2.1.0"
   }
 }

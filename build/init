@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd ${0%/*}
+cd ${0%/*}/..
 npm install -g typescript
 npm install -g bower
 npm install -g tsd

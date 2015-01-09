@@ -5,7 +5,7 @@ var path = require('path');
 var paths = require('./paths.js');
 
 rm('-rf', paths.target);
-make(path.join(paths.sourceTypeScript, 'FireElm.ts'), path.join(paths.target, 'FireElm.js'));
+make(path.join(paths.source, 'FireElm.ts'), path.join(paths.target, 'FireElm.js'));
 
 function make(source, target) {
   cd(paths.build);
