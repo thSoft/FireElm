@@ -1,11 +1,6 @@
 module FireElm {
 
-  export interface Data<Value> {
-    url: string;
-    value: Value;
-  }
-
-  export function read<Value>(observedUrlsPort: PortFromElm<Array<string>>, readPort: PortToElm<Data<Value>>, transform: (rawValue: any) => Value) {
+  export function read<Value>(observedUrlsPort: PortFromElm<Array<string>>, readPort: PortToElm<Value>, transform: (snapshot: FirebaseDataSnapshot) => Value) {
     var currentlyObservedUrls: Array<string> = [];
     var callbackType = "value";
     observedUrlsPort.subscribe(observedUrls => {
@@ -14,23 +9,23 @@ module FireElm {
       });
       currentlyObservedUrls = observedUrls; 
       observedUrls.forEach(observedUrl => {
-        new Firebase(observedUrl).on(callbackType, snapshot => {
-          readPort.send({
-            url: snapshot.toString(),
-            value: transform(snapshot.val())
-          });
-        });
+        new Firebase(observedUrl).on(callbackType, snapshot => transform(snapshot));
       });
     });
   }
 
-  export function write<Value>(writePort: PortFromElm<Data<Value>>) {
+  export interface Data {
+    url: string;
+    value: any;
+  }
+
+  export function write(writePort: PortFromElm<Data>) {
     writePort.subscribe(writeCommand => {
       new Firebase(writeCommand.url).set(writeCommand.value);
     });
   }
 
-  export function push<Value>(pushPort: PortFromElm<Data<Value>>) {
+  export function push(pushPort: PortFromElm<Data>) {
     pushPort.subscribe(pushCommand => {
       new Firebase(pushCommand.url).push(pushCommand.value);
     });
