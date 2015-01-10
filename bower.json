@@ -19,7 +19,7 @@
     "url": "git://github.com/thSoft/FireElm.git"
   },
   "dependencies": {
-    "firebase": "~2.1.0"
+    "firebase": "v2.0.2"
   },
   "typescript": {
     "definition": "target/FireElm.d.ts"
