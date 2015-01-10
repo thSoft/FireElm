@@ -9,7 +9,9 @@ var FireElm;
             });
             currentlyObservedUrls = observedUrls;
             observedUrls.forEach(function (observedUrl) {
-                new Firebase(observedUrl).on(callbackType, function (snapshot) { return transform(snapshot); });
+                new Firebase(observedUrl).on(callbackType, function (snapshot) {
+                    readPort.send(transform(snapshot));
+                });
             });
         });
     }

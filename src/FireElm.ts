@@ -9,7 +9,9 @@ module FireElm {
       });
       currentlyObservedUrls = observedUrls; 
       observedUrls.forEach(observedUrl => {
-        new Firebase(observedUrl).on(callbackType, snapshot => transform(snapshot));
+        new Firebase(observedUrl).on(callbackType, snapshot => {
+          readPort.send(transform(snapshot));
+        });
       });
     });
   }
