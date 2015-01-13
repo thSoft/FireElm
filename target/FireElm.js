@@ -18,19 +18,25 @@ var FireElm;
     FireElm.read = read;
     function write(writePort) {
         writePort.subscribe(function (writeCommand) {
-            new Firebase(writeCommand.url).set(writeCommand.value);
+            if (writeCommand != null) {
+                new Firebase(writeCommand.url).set(writeCommand.value);
+            }
         });
     }
     FireElm.write = write;
     function push(pushPort) {
         pushPort.subscribe(function (pushCommand) {
-            new Firebase(pushCommand.url).push(pushCommand.value);
+            if (pushCommand != null) {
+                new Firebase(pushCommand.url).push(pushCommand.value);
+            }
         });
     }
     FireElm.push = push;
     function remove(urlPort) {
         urlPort.subscribe(function (url) {
-            new Firebase(url).remove();
+            if (url != null) {
+                new Firebase(url).remove();
+            }
         });
     }
     FireElm.remove = remove;

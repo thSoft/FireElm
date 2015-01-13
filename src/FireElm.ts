@@ -23,19 +23,25 @@ module FireElm {
 
   export function write(writePort: PortFromElm<Data>) {
     writePort.subscribe(writeCommand => {
-      new Firebase(writeCommand.url).set(writeCommand.value);
+      if (writeCommand != null) {
+        new Firebase(writeCommand.url).set(writeCommand.value);
+      }
     });
   }
 
   export function push(pushPort: PortFromElm<Data>) {
     pushPort.subscribe(pushCommand => {
-      new Firebase(pushCommand.url).push(pushCommand.value);
+      if (pushCommand != null) {
+        new Firebase(pushCommand.url).push(pushCommand.value);
+      }
     });
   }
 
   export function remove(urlPort: PortFromElm<string>) {
     urlPort.subscribe(url => {
-      new Firebase(url).remove();
+      if (url != null) {
+        new Firebase(url).remove();
+      }
     });
   }
 
