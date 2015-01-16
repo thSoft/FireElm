@@ -5,15 +5,23 @@ module FireElm {
     var callbackType = "value";
     observedUrlsPort.subscribe(observedUrls => {
       currentlyObservedUrls.forEach(currentlyObservedUrl => {
-        new Firebase(currentlyObservedUrl).off(callbackType);
+        if (!contains(observedUrls, currentlyObservedUrl)) {
+          new Firebase(currentlyObservedUrl).off(callbackType);          
+        }
+      });
+      observedUrls.forEach(observedUrl => {
+        if (!contains(currentlyObservedUrls, observedUrl)) {
+          new Firebase(observedUrl).on(callbackType, snapshot => {
+            readPort.send(transform(snapshot));
+          });
+        }
       });
       currentlyObservedUrls = observedUrls; 
-      observedUrls.forEach(observedUrl => {
-        new Firebase(observedUrl).on(callbackType, snapshot => {
-          readPort.send(transform(snapshot));
-        });
-      });
     });
+  }
+
+  function contains<T>(array: Array<T>, value: T) {
+    return array.indexOf(value) != -1;
   }
 
   export interface Data {

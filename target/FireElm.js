@@ -5,17 +5,24 @@ var FireElm;
         var callbackType = "value";
         observedUrlsPort.subscribe(function (observedUrls) {
             currentlyObservedUrls.forEach(function (currentlyObservedUrl) {
-                new Firebase(currentlyObservedUrl).off(callbackType);
+                if (!contains(observedUrls, currentlyObservedUrl)) {
+                    new Firebase(currentlyObservedUrl).off(callbackType);
+                }
+            });
+            observedUrls.forEach(function (observedUrl) {
+                if (!contains(currentlyObservedUrls, observedUrl)) {
+                    new Firebase(observedUrl).on(callbackType, function (snapshot) {
+                        readPort.send(transform(snapshot));
+                    });
+                }
             });
             currentlyObservedUrls = observedUrls;
-            observedUrls.forEach(function (observedUrl) {
-                new Firebase(observedUrl).on(callbackType, function (snapshot) {
-                    readPort.send(transform(snapshot));
-                });
-            });
         });
     }
     FireElm.read = read;
+    function contains(array, value) {
+        return array.indexOf(value) != -1;
+    }
     function write(writePort) {
         writePort.subscribe(function (writeCommand) {
             if (writeCommand != null) {
