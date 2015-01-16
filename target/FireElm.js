@@ -23,6 +23,16 @@ var FireElm;
     function contains(array, value) {
         return array.indexOf(value) != -1;
     }
+    function readData(observedUrlsPort, readPort) {
+        read(observedUrlsPort, readPort, makeData);
+    }
+    FireElm.readData = readData;
+    function makeData(snapshot) {
+        return {
+            url: snapshot.ref().toString(),
+            value: snapshot.val()
+        };
+    }
     function write(writePort) {
         writePort.subscribe(function (writeCommand) {
             if (writeCommand != null) {

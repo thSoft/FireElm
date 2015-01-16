@@ -24,6 +24,17 @@ module FireElm {
     return array.indexOf(value) != -1;
   }
 
+  export function readData(observedUrlsPort: PortFromElm<Array<string>>, readPort: PortToElm<Data>) {
+    read(observedUrlsPort, readPort, makeData);
+  }
+  
+  function makeData(snapshot: FirebaseDataSnapshot): FireElm.Data {
+    return {
+      url: snapshot.ref().toString(),
+      value: snapshot.val()
+    };
+  }
+
   export interface Data {
     url: string;
     value: any;
