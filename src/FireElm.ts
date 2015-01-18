@@ -6,7 +6,11 @@ module FireElm {
     observedUrlsPort.subscribe(observedUrls => {
       currentlyObservedUrls.forEach(currentlyObservedUrl => {
         if (!contains(observedUrls, currentlyObservedUrl)) {
-          new Firebase(currentlyObservedUrl).off(callbackType);          
+          try {
+            new Firebase(currentlyObservedUrl).off(callbackType);
+          } catch (error) {
+            console.log(error);
+          }
         }
       });
       observedUrls.forEach(observedUrl => {

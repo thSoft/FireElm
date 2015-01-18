@@ -6,7 +6,12 @@ var FireElm;
         observedUrlsPort.subscribe(function (observedUrls) {
             currentlyObservedUrls.forEach(function (currentlyObservedUrl) {
                 if (!contains(observedUrls, currentlyObservedUrl)) {
-                    new Firebase(currentlyObservedUrl).off(callbackType);
+                    try {
+                        new Firebase(currentlyObservedUrl).off(callbackType);
+                    }
+                    catch (error) {
+                        console.log(error);
+                    }
                 }
             });
             observedUrls.forEach(function (observedUrl) {
