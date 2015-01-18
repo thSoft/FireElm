@@ -11,9 +11,14 @@ var FireElm;
             });
             observedUrls.forEach(function (observedUrl) {
                 if (!contains(currentlyObservedUrls, observedUrl)) {
-                    new Firebase(observedUrl).on(callbackType, function (snapshot) {
-                        readPort.send(transform(snapshot));
-                    });
+                    try {
+                        new Firebase(observedUrl).on(callbackType, function (snapshot) {
+                            readPort.send(transform(snapshot));
+                        });
+                    }
+                    catch (error) {
+                        console.log(error);
+                    }
                 }
             });
             currentlyObservedUrls = observedUrls;
