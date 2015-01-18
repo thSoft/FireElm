@@ -11,9 +11,13 @@ module FireElm {
       });
       observedUrls.forEach(observedUrl => {
         if (!contains(currentlyObservedUrls, observedUrl)) {
-          new Firebase(observedUrl).on(callbackType, snapshot => {
-            readPort.send(transform(snapshot));
-          });
+          try {
+            new Firebase(observedUrl).on(callbackType, snapshot => {
+              readPort.send(transform(snapshot));
+            });
+          } catch (error) {
+            console.log(error);
+          }
         }
       });
       currentlyObservedUrls = observedUrls; 
@@ -28,7 +32,7 @@ module FireElm {
     read(observedUrlsPort, readPort, makeData);
   }
   
-  function makeData(snapshot: FirebaseDataSnapshot): FireElm.Data {
+  function makeData(snapshot: FirebaseDataSnapshot): Data {
     return {
       url: snapshot.ref().toString(),
       value: snapshot.val()
